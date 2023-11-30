@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coordenadas</title>
+  <style>
+    body {
+      background-image: url('Imagen1.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      text-align: center;
+    }
+    
+    #demo {
+      font-family: "Arial Black", Arial, sans-serif; /* Fuente Arial Black */
+      font-size: 48px; /* Tamaño de fuente 48px */
+      font-style: italic; /* Cursiva */
+      color: white; /* Color blanco */
+    }
+  </style>
+  <!-- Agrega la librería de Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <!-- Agrega el icono al lado del título -->
+  <h1 id="demo"><i class="fas fa-plane"></i> AeroCarranza</h1>
+
+  <!-- Botón con estilo amarillo -->
+  <button onclick="getLocation()" style="background-color: yellow;">Obtener Coordenadas</button>
+
+  <p id="demo"></p>
+
+  <script>
+    // Tu código JavaScript permanece sin cambios
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        document.getElementById("demo").innerHTML = "La geolocalización no es soportada por este navegador.";
+      }
+    }
+
+    function showPosition(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      document.getElementById("demo").innerHTML = "Latitud: " + latitude + "<br>Longitud: " + longitude;
+    }
+
+    function showError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          document.getElementById("demo").innerHTML = "El usuario denegó la solicitud de geolocalización."
+          break;
+        case error.POSITION_UNAVAILABLE:
+          document.getElementById("demo").innerHTML = "La información de ubicación no está disponible."
+          break;
+        case error.TIMEOUT:
+          document.getElementById("demo").innerHTML = "La solicitud para obtener la ubicación del usuario ha caducado."
+          break;
+        case error.UNKNOWN_ERROR:
+          document.getElementById("demo").innerHTML = "Ocurrió un error desconocido."
+          break;
+      }
+    }
+  </script>
+</body>
+</html>
