@@ -10,9 +10,16 @@
       text-align: center;
     }
     
-    #demo {
+    #title {
       font-family: "Arial Black", Arial, sans-serif; /* Fuente Arial Black */
       font-size: 48px; /* Tamaño de fuente 48px */
+      font-style: italic; /* Cursiva */
+      color: white; /* Color blanco */
+    }
+
+    #coordinates {
+      font-family: "Arial Black", Arial, sans-serif; /* Fuente Arial Black */
+      font-size: 36px; /* Tamaño de fuente 36px */
       font-style: italic; /* Cursiva */
       color: white; /* Color blanco */
     }
@@ -22,42 +29,43 @@
 </head>
 <body>
   <!-- Agrega el icono al lado del título -->
-  <h1 id="demo"><i class="fas fa-plane"></i> AeroCarranza</h1>
+  <h1 id="title"><i class="fas fa-plane"></i> AeroCarranza</h1>
 
   <!-- Botón con estilo amarillo -->
   <button onclick="getLocation()" style="background-color: yellow;">Obtener Coordenadas</button>
 
-  <p id="demo"></p>
+  <!-- Nuevo elemento para mostrar las coordenadas -->
+  <p id="coordinates"></p>
 
   <script>
-    // Tu código JavaScript permanece sin cambios
+    
     function getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
       } else {
-        document.getElementById("demo").innerHTML = "La geolocalización no es soportada por este navegador.";
+        document.getElementById("coordinates").innerHTML = "La geolocalización no es soportada por este navegador.";
       }
     }
 
     function showPosition(position) {
       var latitude = position.coords.latitude;
       var longitude = position.coords.longitude;
-      document.getElementById("demo").innerHTML = "Latitud: " + latitude + "<br>Longitud: " + longitude;
+      document.getElementById("coordinates").innerHTML = "Latitud: " + latitude + "<br>Longitud: " + longitude;
     }
 
     function showError(error) {
       switch(error.code) {
         case error.PERMISSION_DENIED:
-          document.getElementById("demo").innerHTML = "El usuario denegó la solicitud de geolocalización."
+          document.getElementById("coordinates").innerHTML = "El usuario denegó la solicitud de geolocalización."
           break;
         case error.POSITION_UNAVAILABLE:
-          document.getElementById("demo").innerHTML = "La información de ubicación no está disponible."
+          document.getElementById("coordinates").innerHTML = "La información de ubicación no está disponible."
           break;
         case error.TIMEOUT:
-          document.getElementById("demo").innerHTML = "La solicitud para obtener la ubicación del usuario ha caducado."
+          document.getElementById("coordinates").innerHTML = "La solicitud para obtener la ubicación del usuario ha caducado."
           break;
         case error.UNKNOWN_ERROR:
-          document.getElementById("demo").innerHTML = "Ocurrió un error desconocido."
+          document.getElementById("coordinates").innerHTML = "Ocurrió un error desconocido."
           break;
       }
     }
